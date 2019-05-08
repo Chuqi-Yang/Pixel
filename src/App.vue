@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ColorPicker />
+    <ColorPicker :color="color" />
     <Canvas />
   </div>
 </template>
@@ -10,9 +10,19 @@ import Canvas from "./components/Canvas";
 import ColorPicker from "./components/ColorPicker";
 export default {
   name: "App",
+  data: function() {
+    return {
+      color: "white"
+    };
+  },
   components: {
     Canvas,
-    ColorPicker
+    ColorPicker,
+    mounted() {
+      this.$root.$on("updatecolor", color => {
+        this.color = color;
+      });
+    }
   }
 };
 </script>
